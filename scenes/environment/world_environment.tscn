@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://c8jfxqut4ux4t"]
+
+[ext_resource type="Texture2D" uid="uid://imgt3riwdbxr" path="res://assets/skybox.hdr" id="1_10pvs"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_dt8ym"]
+panorama = ExtResource("1_10pvs")
+
+[sub_resource type="Sky" id="Sky_yxqgf"]
+sky_material = SubResource("PanoramaSkyMaterial_dt8ym")
+
+[sub_resource type="Environment" id="Environment_vim5j"]
+background_mode = 2
+sky = SubResource("Sky_yxqgf")
+
+[node name="WorldEnvironment" type="WorldEnvironment"]
+environment = SubResource("Environment_vim5j")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.586316, 0.660419, -0.469127, 0, 0.57911, 0.815249, 0.810083, -0.477993, 0.339542, -10.9827, 6.95934, 0.0243194)
+shadow_enabled = true
