@@ -54,7 +54,9 @@ func _update_camera(delta):
 
 func _physics_process(delta):
     Debug.add_property("Velocity", "%.2f" % velocity.length(), 1)
-    Debug.add_property("Current Animation", ANIMATION_PLAYER.current_animation, 2)
+    Debug.add_property("Velocity Y", "%.2f" % velocity.y, 2)
+    Debug.add_property("Current Animation", ANIMATION_PLAYER.current_animation, 3)
+    Debug.add_property("Is Falling", velocity.y < -3.0 and not is_on_floor(), 4)
     _update_camera(delta)
 
 

@@ -26,16 +26,19 @@ func update(delta):
     _set_animation_speed(PLAYER.velocity.length())
 
     if Input.is_action_pressed("sprint"):
-        transition.emit("SprintingPlayerState")
+        transition.emit(NodeStateMachine.SPRINTING_STATE)
 
     if Input.is_action_pressed("crouch") and PLAYER.is_on_floor():
-        transition.emit("CrouchingPlayerState")
+        transition.emit(NodeStateMachine.CROUCHING_STATE)
 
     if Input.is_action_just_pressed("jump") and PLAYER.is_on_floor():
-        transition.emit("JumpingPlayerState")
+        transition.emit(NodeStateMachine.JUMPING_STATE)
+
+    if PLAYER.velocity.y < -3.0 and not PLAYER.is_on_floor():
+        transition.emit(NodeStateMachine.FALLING_STATE)
 
     if PLAYER.velocity.length() == 0:
-        transition.emit("IdlePlayerState")
+        transition.emit(NodeStateMachine.IDLE_STATE)
 
 
 func _set_animation_speed(speed: float) -> void:

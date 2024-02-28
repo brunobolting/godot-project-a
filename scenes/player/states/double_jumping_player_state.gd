@@ -16,7 +16,10 @@ func update(delta):
     PLAYER.update_input(SPEED * INPUT_MULTIPLIER, ACCELERATION, DECELERATION)
     PLAYER.update_velocity()
 
+    if PLAYER.velocity.y < -3.0 and not PLAYER.is_on_floor():
+        transition.emit(NodeStateMachine.FALLING_STATE)
+
     if PLAYER.is_on_floor():
         ANIMATION.play("JumpEnd")
-        transition.emit("IdlePlayerState")
+        transition.emit(NodeStateMachine.JUMPING_STATE)
 

@@ -12,9 +12,9 @@ var RELEASED: bool = false
 
 func enter(previousState) -> void:
     ANIMATION.speed_scale = 1.0
-    if previousState.name != "SlidingPlayerState":
+    if previousState.name != NodeStateMachine.SLIDING_STATE:
         ANIMATION.play("Crouch", -1, CROUCH_SPEED)
-    elif previousState.name == "SlidingPlayerState":
+    elif previousState.name == NodeStateMachine.SLIDING_STATE:
         ANIMATION.current_animation = "Crouch"
         ANIMATION.seek(1.0, true)
 
@@ -34,13 +34,16 @@ func update(delta):
         RELEASED = true
         _uncrouch()
 
+    if PLAYER.velocity.y < -3.0 and not PLAYER.is_on_floor():
+        transition.emit(NodeStateMachine.FALLING_STATE)
+
 
 func _uncrouch():
     if CROUCH_SHAPECAST.is_colliding() == false and Input.is_action_pressed("crouch") == false:
         ANIMATION.play("Crouch", -1, -CROUCH_SPEED * 1.5, true)
         if ANIMATION.is_playing():
             await ANIMATION.animation_finished
-        transition.emit("IdlePlayerState")
+        transition.emit(NodeStateMachine.IDLE_STATE)
     elif CROUCH_SHAPECAST.is_colliding():
         await get_tree().create_timer(0.1).timeout
         _uncrouch()

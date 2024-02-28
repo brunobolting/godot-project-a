@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://ct23nbxj7hhut"]
+[gd_scene load_steps=27 format=3 uid="uid://drerrw7xbk4u8"]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_02j3p"]
 [ext_resource type="Script" path="res://component/health_component.gd" id="1_v14xi"]
@@ -12,6 +12,7 @@
 [ext_resource type="Script" path="res://scenes/player/states/sliding_player_state.gd" id="10_xy2p7"]
 [ext_resource type="Script" path="res://scenes/player/states/jumping_player_state.gd" id="11_we5d7"]
 [ext_resource type="Script" path="res://scenes/player/states/double_jumping_player_state.gd" id="12_j5x1f"]
+[ext_resource type="Script" path="res://scenes/player/states/falling_player_state.gd" id="13_hjqc8"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ylgnn"]
 
@@ -473,6 +474,7 @@ shape = SubResource("CapsuleShape3D_2leim")
 libraries = {
 "": SubResource("AnimationLibrary_jl028")
 }
+blend_times = [&"JumpStart", &"Walking", 0.5, &"JumpStart", &"JumpStart", 0.1]
 
 [node name="ShapeCast3D" type="ShapeCast3D" parent="."]
 unique_name_in_owner = true
@@ -539,13 +541,12 @@ script = ExtResource("9_h775d")
 [node name="SlidingPlayerState" type="Node" parent="PlayerStateMachine"]
 script = ExtResource("10_xy2p7")
 SPEED = 4.16231
-ACCELERATION = null
-DECELERATION = null
-TILT_AMOUNT = null
-SLIDE_ANIMATION_SPEED = null
 
 [node name="JumpingPlayerState" type="Node" parent="PlayerStateMachine"]
 script = ExtResource("11_we5d7")
 
 [node name="DoubleJumpingPlayerState" type="Node" parent="PlayerStateMachine"]
 script = ExtResource("12_j5x1f")
+
+[node name="FallingPlayerState" type="Node" parent="PlayerStateMachine"]
+script = ExtResource("13_hjqc8")

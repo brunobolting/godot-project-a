@@ -5,6 +5,15 @@ extends Node
 @export var PLAYER : Player
 var states: Dictionary = {}
 
+const IDLE_STATE: StringName = "IdlePlayerState"
+const WALKING_STATE: StringName = "WalkingPlayerState"
+const SPRINTING_STATE: StringName = "SprintingPlayerState"
+const CROUCHING_STATE: StringName = "CrouchingPlayerState"
+const JUMPING_STATE: StringName = "JumpingPlayerState"
+const FALLING_STATE: StringName = "FallingPlayerState"
+const DOUBLE_JUMPING_STATE: StringName = "DoubleJumpingPlayerState"
+const SLIDING_STATE: StringName = "SlidingPlayerState"
+
 func _ready():
 	if CURRENT_STATE == null:
 		push_warning("No current state set")

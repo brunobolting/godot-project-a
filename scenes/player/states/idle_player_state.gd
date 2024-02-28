@@ -18,12 +18,15 @@ func update(delta):
     PLAYER.update_velocity()
 
     if Input.is_action_pressed("crouch") and PLAYER.is_on_floor():
-        transition.emit("CrouchingPlayerState")
+        transition.emit(NodeStateMachine.CROUCHING_STATE)
 
     if PLAYER.velocity.length() > 0.0 and PLAYER.is_on_floor():
-        transition.emit("WalkingPlayerState")
+        transition.emit(NodeStateMachine.WALKING_STATE)
 
     if Input.is_action_just_pressed("jump") and PLAYER.is_on_floor():
-        transition.emit("JumpingPlayerState")
+        transition.emit(NodeStateMachine.JUMPING_STATE)
+
+    if PLAYER.velocity.y < -3.0 and not PLAYER.is_on_floor():
+        transition.emit(NodeStateMachine.FALLING_STATE)
 
 

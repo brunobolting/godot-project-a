@@ -34,4 +34,4 @@ func _set_tilt(playerRotation: float) -> void:
     ANIMATION.get_animation("Sliding").track_set_key_value(_CAMERA_ROTATION_ANIM_TRACK, 2, tilt)
 
 func finish():
-    transition.emit("CrouchingPlayerState")
+    transition.emit(NodeStateMachine.CROUCHING_STATE)
