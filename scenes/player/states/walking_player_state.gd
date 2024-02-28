@@ -6,11 +6,17 @@ extends PlayerMovementState
 @export_range(0, 1, 0.1) var DECELERATION: float = 0.25
 @export var TOP_ANIM_SPEED: float = 2.2
 
-func enter() -> void:
-    ANIMATION.play("Walking", -1.0, 1.0)
+func enter(_previousState) -> void:
+    if ANIMATION.is_playing() and ANIMATION.current_animation == "JumpEnd":
+        await ANIMATION.animation_finished
+        ANIMATION.play("Walking", -1.0, 1.0)
+    else:
+        ANIMATION.play("Walking", -1.0, 1.0)
+
 
 func exit() -> void:
     ANIMATION.speed_scale = 1.0
+
 
 func update(delta):
     PLAYER.update_gravity(delta)
@@ -25,8 +31,12 @@ func update(delta):
     if Input.is_action_pressed("crouch") and PLAYER.is_on_floor():
         transition.emit("CrouchingPlayerState")
 
+    if Input.is_action_just_pressed("jump") and PLAYER.is_on_floor():
+        transition.emit("JumpingPlayerState")
+
     if PLAYER.velocity.length() == 0:
         transition.emit("IdlePlayerState")
+
 
 func _set_animation_speed(speed: float) -> void:
     var alpha = remap(speed, 0.0, SPEED, 0.0, 1.0)

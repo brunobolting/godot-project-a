@@ -8,8 +8,20 @@ extends PlayerMovementState
 
 @onready var CROUCH_SHAPECAST: ShapeCast3D = %ShapeCast3D
 
-func enter() -> void:
-    ANIMATION.play("Crouch", -1, CROUCH_SPEED)
+var RELEASED: bool = false
+
+func enter(previousState) -> void:
+    ANIMATION.speed_scale = 1.0
+    if previousState.name != "SlidingPlayerState":
+        ANIMATION.play("Crouch", -1, CROUCH_SPEED)
+    elif previousState.name == "SlidingPlayerState":
+        ANIMATION.current_animation = "Crouch"
+        ANIMATION.seek(1.0, true)
+
+
+func exit() -> void:
+    RELEASED = false
+
 
 func update(delta):
     PLAYER.update_gravity(delta)
@@ -18,6 +30,10 @@ func update(delta):
 
     if Input.is_action_just_released("crouch"):
         _uncrouch()
+    elif Input.is_action_pressed("crouch") == false and RELEASED == false:
+        RELEASED = true
+        _uncrouch()
+
 
 func _uncrouch():
     if CROUCH_SHAPECAST.is_colliding() == false and Input.is_action_pressed("crouch") == false:
