@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Weapon" load_steps=3 format=3 uid="uid://fljut15mapsa"]
+
+[ext_resource type="Script" path="res://scenes/weapons/weapon.gd" id="1_camqn"]
+[ext_resource type="ArrayMesh" uid="uid://d15n20t153sx1" path="res://scenes/weapons/crowbar/crowbar_mesh.res" id="1_gfhus"]
+
+[resource]
+script = ExtResource("1_camqn")
+name = &"Crowbar"
+damage = 0.0
+position = Vector3(0.355, -0.3, -0.375)
+rotation = Vector3(-95, -18, 180)
+scale = Vector3(1.8, 1.8, 1.8)
+mesh = ExtResource("1_gfhus")
+shadow = true

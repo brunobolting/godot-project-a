@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://dckcb5104b5bd"]
+
+[ext_resource type="Script" path="res://scenes/weapons/weapon_manager.gd" id="1_te3qc"]
+
+[node name="WeaponManager" type="Node3D"]
+script = ExtResource("1_te3qc")
+
+[node name="WeaponMesh" type="MeshInstance3D" parent="."]
+unique_name_in_owner = true
+
+[node name="WeaponShadow" type="MeshInstance3D" parent="."]
+unique_name_in_owner = true

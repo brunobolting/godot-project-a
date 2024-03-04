@@ -1,7 +1,8 @@
-[gd_scene load_steps=18 format=3 uid="uid://d02g1xm8ofkjf"]
+[gd_scene load_steps=19 format=3 uid="uid://d02g1xm8ofkjf"]
 
 [ext_resource type="PackedScene" uid="uid://c8jfxqut4ux4t" path="res://scenes/environment/world_environment.tscn" id="1_r2lx2"]
-[ext_resource type="PackedScene" uid="uid://ct23nbxj7hhut" path="res://scenes/player/player.tscn" id="2_rlgos"]
+[ext_resource type="PackedScene" uid="uid://drerrw7xbk4u8" path="res://scenes/player/player.tscn" id="2_rlgos"]
+[ext_resource type="PackedScene" uid="uid://cniwsmip10lp5" path="res://scenes/enemies/dummy/dummy.tscn" id="3_1oexk"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k2an7"]
 albedo_color = Color(0.376471, 0.545098, 0.360784, 1)
@@ -120,3 +121,6 @@ physics_material_override = SubResource("PhysicsMaterial_q8l6r")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="plataform2/StaticBody3D"]
 shape = SubResource("BoxShape3D_otxpw")
+
+[node name="Dummy" parent="." instance=ExtResource("3_1oexk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18, -1.49012e-07, 1)

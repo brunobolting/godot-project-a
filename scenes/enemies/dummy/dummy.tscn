@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=3 uid="uid://cniwsmip10lp5"]
+
+[ext_resource type="Script" path="res://component/health_component.gd" id="1_3dxh2"]
+[ext_resource type="Script" path="res://component/hurtbox_component.gd" id="2_k0krj"]
+[ext_resource type="PackedScene" uid="uid://qtdvvkm06i2f" path="res://scenes/enemies/dummy/dummy.glb" id="3_148ea"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_wcqbj"]
+height = 2.5
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dyueo"]
+size = Vector3(1.5, 2.5, 1.5)
+
+[node name="Dummy" type="CharacterBody3D" groups=["enemy"]]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
+shape = SubResource("CapsuleShape3D_wcqbj")
+
+[node name="Root Scene" parent="CollisionShape3D" instance=ExtResource("3_148ea")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, -1.2, 0)
+
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("1_3dxh2")
+
+[node name="HurtboxComponent" type="Area3D" parent="." node_paths=PackedStringArray("health_component")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
+script = ExtResource("2_k0krj")
+health_component = NodePath("../HealthComponent")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HurtboxComponent"]
+shape = SubResource("BoxShape3D_dyueo")
