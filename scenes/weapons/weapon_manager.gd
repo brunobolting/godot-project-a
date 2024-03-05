@@ -11,6 +11,7 @@ extends Node3D
 
 @onready var weaponMesh: MeshInstance3D = %WeaponMesh
 @onready var weaponShadow: MeshInstance3D = %WeaponShadow
+@onready var hitboxComponent: HitboxComponent = %HitboxComponent
 
 func _ready() -> void:
     load_weapon()
@@ -22,6 +23,9 @@ func load_weapon() -> void:
     rotation_degrees = WEAPON_TYPE.rotation
     scale = WEAPON_TYPE.scale
     weaponShadow.visible = WEAPON_TYPE.shadow
+    hitboxComponent.rotation = WEAPON_TYPE.hitbox_rotation
+    hitboxComponent.position = WEAPON_TYPE.hitbox_position
+    hitboxComponent.scale = WEAPON_TYPE.hitbox_scale
 
 
 # @export var ANIMATION: AnimationPlayer

@@ -7,6 +7,10 @@ class_name Weapon extends Resource
 @export var position: Vector3
 @export var rotation: Vector3
 @export var scale: Vector3
+@export_category("Weapon Hitbox")
+@export var hitbox_position: Vector3
+@export var hitbox_rotation: Vector3
+@export var hitbox_scale: Vector3
 @export_category("Visual Settings")
 @export var mesh: Mesh
 @export var shadow: bool

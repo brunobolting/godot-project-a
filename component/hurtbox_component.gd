@@ -17,7 +17,7 @@ func _on_area_entered(hitbox: HitboxComponent):
 	if health_component == null:
 		return
 
-	if self.owner.name == hitbox.owner.name:
+	if self.owner == hitbox.owner.owner:
 		return
 
 	health_component.take_damage(hitbox.DAMAGE)
