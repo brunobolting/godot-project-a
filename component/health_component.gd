@@ -12,7 +12,7 @@ func _ready():
 
 func take_damage(damage: float) -> void:
 	_current_health = max(_current_health - damage, 0)
-	print("Owner: ", owner.name, "Health: ", _current_health)
+	print(owner.name, "Health: ", _current_health)
 	Callable(_check_death).call_deferred()
 
 func _check_death() -> void:

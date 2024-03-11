@@ -1,10 +1,8 @@
-[gd_scene load_steps=41 format=3 uid="uid://drerrw7xbk4u8"]
+[gd_scene load_steps=39 format=3 uid="uid://drerrw7xbk4u8"]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_02j3p"]
 [ext_resource type="Script" path="res://component/health_component.gd" id="1_v14xi"]
-[ext_resource type="PackedScene" uid="uid://dckcb5104b5bd" path="res://scenes/weapons/weapon_manager.tscn" id="2_medfe"]
 [ext_resource type="Script" path="res://component/hurtbox_component.gd" id="2_pvpxg"]
-[ext_resource type="Resource" uid="uid://cbo3exkm1kd84" path="res://scenes/weapons/sword/sword.tres" id="3_4nyg6"]
 [ext_resource type="Script" path="res://scenes/player/reticle.gd" id="4_a3gfp"]
 [ext_resource type="Script" path="res://scenes/weapons/sword/sword.gd" id="5_1sslh"]
 [ext_resource type="PackedScene" uid="uid://ds5x5tw0gd4n8" path="res://scenes/weapons/sword/Dagger.glb" id="5_hoa3n"]
@@ -67,7 +65,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [false]
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_5k2v1"]
@@ -276,9 +274,9 @@ tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.4),
-"transitions": PackedFloat32Array(0.5, -2),
+"transitions": PackedFloat32Array(0.5, 0.5),
 "update": 0,
-"values": [Vector3(-0.025, -0.32, -0.8), Vector3(0.62, -0.265, -0.56)]
+"values": [Vector3(0.5, -0.32, -0.8), Vector3(0.5, -0.25, -0.8)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -288,9 +286,9 @@ tracks/1/interp = 2
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.4),
-"transitions": PackedFloat32Array(0.5, -2),
+"transitions": PackedFloat32Array(0.5, 0.5),
 "update": 0,
-"values": [Vector3(-1.42942, 1.62316, -0.0785398), Vector3(-0.146608, 0.853466, -0.0349066)]
+"values": [Vector3(-1.42942, 1.62316, -0.0785398), Vector3(-1.309, 1.5708, -0.0785398)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_n6top"]
@@ -728,7 +726,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_ylgnn")
 
 [node name="PlaceholderMesh" type="MeshInstance3D" parent="CollisionShape3D"]
-visible = false
 mesh = SubResource("CapsuleMesh_5hiwp")
 skeleton = NodePath("../..")
 
@@ -737,11 +734,6 @@ unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 
 [node name="MainCamera" type="Camera3D" parent="CameraController"]
-
-[node name="WeaponManager" parent="CameraController/MainCamera" instance=ExtResource("2_medfe")]
-transform = Transform3D(20.7055, -77.2741, -3.44378e-06, 3.04776e-07, -3.4836e-06, 80, -77.2741, -20.7055, -6.07232e-07, 0.53, -0.445, -0.655)
-visible = false
-WEAPON_TYPE = ExtResource("3_4nyg6")
 
 [node name="Sword" type="Node3D" parent="CameraController/MainCamera" node_paths=PackedStringArray("ANIMATION_PLAYER")]
 transform = Transform3D(0.173652, 0.0858316, 0.981059, 0, 0.996194, -0.0871558, -0.984807, 0.0151347, 0.172991, 0.7, -0.5, -0.8)
@@ -752,10 +744,12 @@ ANIMATION_PLAYER = NodePath("../AnimationPlayer")
 
 [node name="HitboxComponent" type="Area3D" parent="CameraController/MainCamera/Sword"]
 script = ExtResource("6_srsvt")
+NAME = &"Sword"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CameraController/MainCamera/Sword/HitboxComponent"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.039204, 0.808622, 0)
 shape = SubResource("CapsuleShape3D_0j1xk")
+disabled = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CameraController/MainCamera"]
 libraries = {
@@ -772,11 +766,12 @@ blend_times = [&"sword_attack_04", &"sword_idle", 0.1, &"sword_attack_01", &"swo
 unique_name_in_owner = true
 script = ExtResource("1_v14xi")
 
-[node name="HurtboxComponent" type="Area3D" parent="." node_paths=PackedStringArray("health_component")]
+[node name="HurtboxComponent" type="Area3D" parent="." node_paths=PackedStringArray("HEALTH_COMPONENT")]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 script = ExtResource("2_pvpxg")
-health_component = NodePath("../HealthComponent")
+NAME = &"Player"
+HEALTH_COMPONENT = NodePath("../HealthComponent")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HurtboxComponent"]
 shape = SubResource("CapsuleShape3D_2leim")
