@@ -1,13 +1,16 @@
-[gd_scene load_steps=29 format=3 uid="uid://drerrw7xbk4u8"]
+[gd_scene load_steps=41 format=3 uid="uid://drerrw7xbk4u8"]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_02j3p"]
 [ext_resource type="Script" path="res://component/health_component.gd" id="1_v14xi"]
 [ext_resource type="PackedScene" uid="uid://dckcb5104b5bd" path="res://scenes/weapons/weapon_manager.tscn" id="2_medfe"]
 [ext_resource type="Script" path="res://component/hurtbox_component.gd" id="2_pvpxg"]
-[ext_resource type="Resource" uid="uid://fljut15mapsa" path="res://scenes/weapons/crowbar/crowbar.tres" id="3_us75y"]
+[ext_resource type="Resource" uid="uid://cbo3exkm1kd84" path="res://scenes/weapons/sword/sword.tres" id="3_4nyg6"]
 [ext_resource type="Script" path="res://scenes/player/reticle.gd" id="4_a3gfp"]
+[ext_resource type="Script" path="res://scenes/weapons/sword/sword.gd" id="5_1sslh"]
+[ext_resource type="PackedScene" uid="uid://ds5x5tw0gd4n8" path="res://scenes/weapons/sword/Dagger.glb" id="5_hoa3n"]
 [ext_resource type="Script" path="res://scenes/state_machine/node_state_machine.gd" id="5_wrbq7"]
 [ext_resource type="Script" path="res://scenes/player/states/idle_player_state.gd" id="6_8hh0n"]
+[ext_resource type="Script" path="res://component/hitbox_component.gd" id="6_srsvt"]
 [ext_resource type="Script" path="res://scenes/player/states/walking_player_state.gd" id="7_g74wp"]
 [ext_resource type="Script" path="res://scenes/player/states/sprinting_player_state.gd" id="8_fwb2p"]
 [ext_resource type="Script" path="res://scenes/player/states/crouching_player_state.gd" id="9_h775d"]
@@ -24,6 +27,282 @@ metallic = 0.1
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_5hiwp"]
 material = SubResource("StandardMaterial3D_thhvg")
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0j1xk"]
+radius = 0.205944
+
+[sub_resource type="Animation" id="Animation_11f7j"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sword:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.7, -0.5, -0.8)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sword:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.0872665, 1.39626, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sword/HitboxComponent/CollisionShape3D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_5k2v1"]
+resource_name = "sword_attack_01"
+length = 0.4
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sword:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(-2, 1),
+"update": 0,
+"values": [Vector3(0.8, -0.5, -0.7), Vector3(-0.8, -0.4, -0.475)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sword:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(-2, 1),
+"update": 0,
+"values": [Vector3(1.309, 1.39626, 0), Vector3(1.1397, 1.39626, -2.68781)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sword/HitboxComponent/CollisionShape3D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.15, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="Animation" id="Animation_r43di"]
+resource_name = "sword_attack_02"
+length = 0.4
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sword:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(-2, 1),
+"update": 0,
+"values": [Vector3(-0.8, -0.4, -0.475), Vector3(0.885, -0.47, -0.475)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sword:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(-2, 1),
+"update": 0,
+"values": [Vector3(-1.20079, 1.56381, -0.00698132), Vector3(-1.87972, -1.45211, -0.00698132)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sword/HitboxComponent/CollisionShape3D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.15, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="Animation" id="Animation_gftex"]
+resource_name = "sword_attack_03"
+length = 0.4
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sword:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(-2, 1),
+"update": 0,
+"values": [Vector3(-0.33, -0.155, -0.93), Vector3(0.775, -0.705, -0.68)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sword:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(-2, 1),
+"update": 0,
+"values": [Vector3(-0.785398, 2.06647, 0), Vector3(-0.663225, 0.93026, -1.84307)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sword/HitboxComponent/CollisionShape3D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.05, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="Animation" id="Animation_mavt6"]
+resource_name = "sword_attack_04"
+length = 0.4
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sword:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(-2, 1),
+"update": 0,
+"values": [Vector3(0.19, -0.155, -0.9), Vector3(-0.46, -0.585, -0.545)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sword:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(-2, 1),
+"update": 0,
+"values": [Vector3(0.7662, 1.22871, -0.0872665), Vector3(0.596903, 1.97048, -2.12581)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sword/HitboxComponent/CollisionShape3D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.05, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="Animation" id="Animation_qdy0a"]
+resource_name = "sword_idle"
+length = 0.8
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sword:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 0.8),
+"transitions": PackedFloat32Array(-2, -2, -2),
+"update": 0,
+"values": [Vector3(0.7, -0.5, -0.8), Vector3(0.7, -0.52, -0.8), Vector3(0.7, -0.5, -0.8)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sword:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 0.8),
+"transitions": PackedFloat32Array(-2, 1, -2),
+"update": 0,
+"values": [Vector3(0.0872665, 1.39626, 0), Vector3(0.0872665, 1.40499, 0.0174533), Vector3(0.0872665, 1.39626, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_050r3"]
+resource_name = "sword_parry_01"
+length = 0.4
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sword:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(0.5, -2),
+"update": 0,
+"values": [Vector3(-0.025, -0.32, -0.8), Vector3(0.62, -0.265, -0.56)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sword:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(0.5, -2),
+"update": 0,
+"values": [Vector3(-1.42942, 1.62316, -0.0785398), Vector3(-0.146608, 0.853466, -0.0349066)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_n6top"]
+_data = {
+"RESET": SubResource("Animation_11f7j"),
+"sword_attack_01": SubResource("Animation_5k2v1"),
+"sword_attack_02": SubResource("Animation_r43di"),
+"sword_attack_03": SubResource("Animation_gftex"),
+"sword_attack_04": SubResource("Animation_mavt6"),
+"sword_idle": SubResource("Animation_qdy0a"),
+"sword_parry_01": SubResource("Animation_050r3")
+}
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_2leim"]
 
@@ -439,7 +718,7 @@ _data = {
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_emnvy"]
 
-[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("CAMERA_CONTROLLER", "ANIMATION_PLAYER")]
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("CAMERA_CONTROLLER", "ANIMATION_PLAYER") groups=["player"]]
 script = ExtResource("1_02j3p")
 CAMERA_CONTROLLER = NodePath("CameraController/MainCamera")
 ANIMATION_PLAYER = NodePath("AnimationPlayer")
@@ -460,8 +739,34 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 [node name="MainCamera" type="Camera3D" parent="CameraController"]
 
 [node name="WeaponManager" parent="CameraController/MainCamera" instance=ExtResource("2_medfe")]
-transform = Transform3D(-1.7119, -0.554114, 0.0484787, 1.37149e-08, 0.15688, 1.79315, -0.55623, 1.70539, -0.149202, 0.355, -0.3, -0.375)
-WEAPON_TYPE = ExtResource("3_us75y")
+transform = Transform3D(20.7055, -77.2741, -3.44378e-06, 3.04776e-07, -3.4836e-06, 80, -77.2741, -20.7055, -6.07232e-07, 0.53, -0.445, -0.655)
+visible = false
+WEAPON_TYPE = ExtResource("3_4nyg6")
+
+[node name="Sword" type="Node3D" parent="CameraController/MainCamera" node_paths=PackedStringArray("ANIMATION_PLAYER")]
+transform = Transform3D(0.173652, 0.0858316, 0.981059, 0, 0.996194, -0.0871558, -0.984807, 0.0151347, 0.172991, 0.7, -0.5, -0.8)
+script = ExtResource("5_1sslh")
+ANIMATION_PLAYER = NodePath("../AnimationPlayer")
+
+[node name="Root Scene" parent="CameraController/MainCamera/Sword" instance=ExtResource("5_hoa3n")]
+
+[node name="HitboxComponent" type="Area3D" parent="CameraController/MainCamera/Sword"]
+script = ExtResource("6_srsvt")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CameraController/MainCamera/Sword/HitboxComponent"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.039204, 0.808622, 0)
+shape = SubResource("CapsuleShape3D_0j1xk")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CameraController/MainCamera"]
+libraries = {
+"": SubResource("AnimationLibrary_n6top")
+}
+next/sword_attack_01 = &"sword_idle"
+next/sword_attack_02 = &"sword_idle"
+next/sword_attack_03 = &"sword_idle"
+next/sword_attack_04 = &"sword_idle"
+next/sword_parry_01 = &"sword_idle"
+blend_times = [&"sword_attack_04", &"sword_idle", 0.1, &"sword_attack_01", &"sword_idle", 0.1, &"sword_idle", &"sword_attack_04", 0.1, &"sword_idle", &"sword_attack_01", 0.1, &"sword_idle", &"sword_attack_02", 0.1, &"sword_idle", &"sword_attack_03", 0.1, &"sword_idle", &"sword_parry_01", 0.1, &"sword_attack_02", &"sword_idle", 0.1, &"sword_attack_03", &"sword_idle", 0.1, &"sword_parry_01", &"sword_idle", 0.05]
 
 [node name="HealthComponent" type="Node" parent="."]
 unique_name_in_owner = true

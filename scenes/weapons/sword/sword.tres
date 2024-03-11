@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Weapon" load_steps=3 format=3 uid="uid://cbo3exkm1kd84"]
+
+[ext_resource type="ArrayMesh" uid="uid://cfd60f71xlv7x" path="res://scenes/weapons/sword/sword.res" id="1_fi0rk"]
+[ext_resource type="Script" path="res://scenes/weapons/weapon.gd" id="1_yf803"]
+
+[resource]
+script = ExtResource("1_yf803")
+name = &"Sword"
+damage = 0.0
+position = Vector3(0.53, -0.445, -0.655)
+rotation = Vector3(-90, 80, -5)
+scale = Vector3(80, 80, 80)
+hitbox_position = Vector3(0, 0, 0)
+hitbox_rotation = Vector3(90, 80, -5)
+hitbox_scale = Vector3(0.01, 0.01, 0.01)
+mesh = ExtResource("1_fi0rk")
+shadow = false

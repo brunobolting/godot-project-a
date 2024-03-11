@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://dcmf31b3ftnqd"]
+
+[ext_resource type="Script" path="res://scenes/weapons/sword/sword.gd" id="1_j5gfb"]
+[ext_resource type="PackedScene" uid="uid://ds5x5tw0gd4n8" path="res://scenes/weapons/sword/Dagger.glb" id="1_x3q1b"]
+[ext_resource type="Script" path="res://component/hitbox_component.gd" id="2_etubb"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0j1xk"]
+radius = 0.205944
+
+[node name="Sword" type="Node3D"]
+script = ExtResource("1_j5gfb")
+
+[node name="Root Scene" parent="." instance=ExtResource("1_x3q1b")]
+
+[node name="HitboxComponent" type="Area3D" parent="."]
+script = ExtResource("2_etubb")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HitboxComponent"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.039204, 0.808622, 0)
+shape = SubResource("CapsuleShape3D_0j1xk")
+disabled = true

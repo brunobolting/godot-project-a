@@ -17,7 +17,9 @@ func _on_area_entered(hitbox: HitboxComponent):
 	if health_component == null:
 		return
 
-	if self.owner == hitbox.owner.owner:
+	# print("hurtbox: ", self.owner, " hitbox: ", hitbox.owner)
+
+	if self.owner.is_in_group("player"):
 		return
 
 	health_component.take_damage(hitbox.DAMAGE)
